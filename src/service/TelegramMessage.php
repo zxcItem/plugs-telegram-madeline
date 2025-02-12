@@ -30,6 +30,7 @@ class TelegramMessage extends Service
                 if (isset($message['_']) && ($message['_'] === 'messageService' || isset($message['fwd_from']))) {
                     continue;  // 跳过符合条件的消息
                 }
+                $message['grouped_id'] = isset($message['grouped_id']) ? $message['grouped_id'] : CodeExtend::uniqidNumber(17);
                 if (self::redisCache($message['grouped_id'],$message['id'])) continue;
                 if (self::instance()->checkKeyword($message['message'])) continue;
                 $mediaMessage = [];
@@ -52,13 +53,12 @@ class TelegramMessage extends Service
      */
     public static function messageMediaDocument($message,$channel)
     {
-        $grouped_id = isset($message['grouped_id']) ? $message['grouped_id'] : CodeExtend::uniqidNumber(17);
-        RedisService::instance()->set("GroupedId:{$grouped_id}:{$message['id']}",3600*12*7);
+        RedisService::instance()->set("GroupedId:{$message['grouped_id']}:{$message['id']}",3600*12*7);
         return [
             'channel_id'   => $message['peer_id'],
             'account_id'   => $channel['account_id'],
             'message_id'   => $message['id'],
-            'grouped_id'   => $grouped_id,
+            'grouped_id'   => $message['grouped_id'],
             'date'         => $message['date'] ?? 0,
         ];
     }
