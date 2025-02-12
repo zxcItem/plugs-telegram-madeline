@@ -53,7 +53,7 @@ class TelegramMessage extends Service
      */
     public static function messageMediaDocument($message,$channel)
     {
-        RedisService::instance()->set("GroupedId:{$message['grouped_id']}:{$message['id']}",3600*12*7);
+        RedisService::instance()->set("GroupedId:{$message['grouped_id']}:{$message['id']}",$message['id'],3600*12*7);
         return [
             'channel_id'   => $message['peer_id'],
             'account_id'   => $channel['account_id'],
