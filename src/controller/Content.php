@@ -37,7 +37,7 @@ class Content extends Controller
         }, function (QueryHelper $query) {
             $query->with(['channel'=>function($channel){
                 $channel->field('channel_id,channel_title');
-            },'account'])->equal('channel_id,forward')->like('caption')->dateBetween('create_at');
+            },'account'])->equal('channel_id,forward,message_id,grouped_id')->like('caption')->dateBetween('create_at');
         });
     }
 

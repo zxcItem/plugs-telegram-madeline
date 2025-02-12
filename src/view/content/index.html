@@ -36,7 +36,7 @@
                 {field: 'channel', title: '所属频道', width: 150, align: 'center',templet: '<div>{{d.channel.channel_title||""}}</div>'},
                 {field: 'grouped_id', title: '组合内容ID', width: 150, align: 'center',sort: true},
                 {field: 'message_id', title: '来源ID', width: 100, align: 'center'},
-                {field: 'caption', title: '内容描述', minWidth: 200, align: 'center'},
+                {field: 'caption', title: '内容描述', minWidth: 200, align: 'center',sort: true},
                 {field: 'forward', title: '转发', width: 80, align: 'center', sort: true, templet:function (d) {
                         d.show = "{:url('plugin-telegram-madeline/content/forward')}";
                         if (d.forward >0){
