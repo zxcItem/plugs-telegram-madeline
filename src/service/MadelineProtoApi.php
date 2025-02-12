@@ -1,7 +1,7 @@
 <?php
 
 
-namespace plugin\telegram\service;
+namespace plugin\telegram\madeline\service;
 
 use danog\MadelineProto\API;
 use danog\MadelineProto\Exception;
@@ -10,7 +10,7 @@ use think\admin\Service;
 /**
  * MadelineProto接口
  * Class MadelineProtoApi
- * @package plugin\telegram\service
+ * @package plugin\telegram\madeline\service
  */
 class MadelineProtoApi extends Service
 {

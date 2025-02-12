@@ -2,9 +2,9 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\controller;
+namespace plugin\telegram\madeline\controller;
 
-use plugin\telegram\model\PluginTelegramBaseKeyword;
+use plugin\telegram\madeline\model\PluginTelegramBaseKeyword;
 use think\admin\Controller;
 use think\admin\helper\QueryHelper;
 
@@ -12,7 +12,7 @@ use think\admin\helper\QueryHelper;
 /**
  * 敏感词管理
  * Class Keyword
- * @package plugin\telegram\controller
+ * @package plugin\telegram\madeline\controller
  */
 class Keyword extends Controller
 {

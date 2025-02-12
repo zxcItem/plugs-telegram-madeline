@@ -2,12 +2,12 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\command;
+namespace plugin\telegram\madeline\command;
 
 use danog\MadelineProto\Exception;
-use plugin\telegram\model\PluginTelegramChannelContent;
-use plugin\telegram\service\ConfigService;
-use plugin\telegram\service\MadelineProtoApi;
+use plugin\telegram\madeline\model\PluginTelegramSourceForward;
+use plugin\telegram\madeline\service\ConfigService;
+use plugin\telegram\madeline\service\MadelineProtoApi;
 use think\admin\Command;
 use think\console\Input;
 use think\console\Output;
@@ -36,14 +36,14 @@ class Preview extends Command
     protected function execute(Input $input, Output $output)
     {
         try {
-            $content = PluginTelegramChannelContent::mk()->withoutField('cover')->where(['forward'=>0])->with(['media'=>function($media){
+            $content = PluginTelegramSourceForward::mk()->withoutField('cover')->where(['forward'=>0])->with(['media'=>function($media){
                 $media->field('grouped_id,message_id');
             }])->find()->toArray();
             if (isset($content['media'])) {
                 $message = array_column($content['media'],'message_id');
                 $forward_channel = ConfigService::get('forward_channel');
                 MadelineProtoApi::forwardMessages($content['account_id'],$forward_channel,$content['channel_id'],$message,true,true);
-                PluginTelegramChannelContent::mk()
+                PluginTelegramSourceForward::mk()
                     ->where('channel_id',$content['channel_id'])->whereIn('message_id',$message)->update(['forward'=>1]);
                 $this->setQueueSuccess("资源转发成功！");
             }

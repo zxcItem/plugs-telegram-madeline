@@ -2,18 +2,16 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\controller\api;
+namespace plugin\telegram\madeline\controller\api;
 
-use plugin\telegram\service\MadelineProtoApi;
-use plugin\telegram\service\SocketService;
-use plugin\telegram\service\TelegramApi;
-use plugin\telegram\service\WorkerService;
+use plugin\telegram\madeline\service\MadelineProtoApi;
+use plugin\telegram\madeline\service\TelegramApi;
 use think\admin\Controller;
 use think\exception\HttpResponseException;
 
 /**
  * 目标频道操作
- * @package plugin\telegram\controller\api
+ * @package plugin\telegram\madeline\controller\api
  */
 class Source extends Controller
 {

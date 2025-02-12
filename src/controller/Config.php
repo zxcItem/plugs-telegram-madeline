@@ -2,16 +2,16 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\controller;
+namespace plugin\telegram\madeline\controller;
 
-use plugin\telegram\service\ConfigService;
+use plugin\telegram\madeline\service\ConfigService;
 use think\admin\Controller;
 use think\admin\Exception;
 
 /**
  * 投票参数配置
  * @class Config
- * @package plugin\telegram\controller
+ * @package plugin\telegram\madeline\controller
  */
 class Config extends Controller
 {

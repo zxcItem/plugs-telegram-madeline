@@ -2,12 +2,12 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\command;
+namespace plugin\telegram\madeline\command;
 
-use plugin\telegram\model\PluginTelegramChannelContent;
-use plugin\telegram\model\PluginTelegramChannelSource;
-use plugin\telegram\service\MadelineProtoApi;
-use plugin\telegram\service\TelegramMessage;
+use plugin\telegram\madeline\model\PluginTelegramSourceForward;
+use plugin\telegram\madeline\model\PluginTelegramChannelSource;
+use plugin\telegram\madeline\service\MadelineProtoApi;
+use plugin\telegram\madeline\service\TelegramMessage;
 use think\admin\Command;
 use think\console\Input;
 use think\console\Output;
@@ -15,7 +15,7 @@ use think\console\Output;
 /**
  * 频道采集
  * @class Clear
- * @package plugin\telegram\command
+ * @package plugin\telegram\madeline\command
  */
 class Channel extends Command
 {
@@ -104,7 +104,7 @@ class Channel extends Command
     {
         $this->app->db->transaction(function () use ($contentMessage,$offset_id) {
             if ($contentMessage){
-                PluginTelegramChannelContent::mk()->saveAll($contentMessage);
+                PluginTelegramSourceForward::mk()->saveAll($contentMessage);
                 PluginTelegramChannelSource::mk()->where('channel_id',$this->channel['channel_id'])->update(['last_message_id'=>$offset_id]);
             }
         });

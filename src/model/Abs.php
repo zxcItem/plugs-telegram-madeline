@@ -3,14 +3,14 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\model;
+namespace plugin\telegram\madeline\model;
 
 use think\admin\Model;
 
 /**
  * 模型抽象类
  * @class Abs
- * @package plugin\telegram\model
+ * @package plugin\telegram\madeline\model
  */
 abstract class Abs extends Model
 {

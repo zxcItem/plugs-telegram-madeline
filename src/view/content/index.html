@@ -6,10 +6,6 @@
 <a data-table-id="SourceContentTable" class="layui-btn layui-btn-sm layui-btn-primary" data-queue="{:url('preview')}">自动刷新资源</a>
 <!--{/if}-->
 
-<!--{if auth("comment")}-->
-<a data-table-id="SourceContentTable" class="layui-btn layui-btn-sm layui-btn-primary" data-queue="{:url('comment')}">自动刷新评论</a>
-<!--{/if}-->
-
 <!--{if auth("remove")}-->
 <a data-confirm="确定永久删除吗？" data-table-id="SourceContentTable" data-action='{:url("remove")}' data-rule="id#{id}" class='layui-btn layui-btn-sm layui-btn-primary'>批量删除</a>
 <!--{/if}-->

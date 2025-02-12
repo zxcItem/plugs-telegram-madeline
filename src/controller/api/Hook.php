@@ -2,18 +2,17 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\controller\api;
+namespace plugin\telegram\madeline\controller\api;
 
-use plugin\telegram\model\PluginTelegramChannelContent;
-use plugin\telegram\service\ConfigService;
-use plugin\telegram\service\SocketService;
-use plugin\telegram\service\TelegramApi;
+use plugin\telegram\madeline\model\PluginTelegramSourceForward;
+use plugin\telegram\madeline\service\ConfigService;
+use plugin\telegram\madeline\service\TelegramApi;
 use think\admin\Controller;
 use think\exception\HttpResponseException;
 
 /**
  * Telegram API WebHook
- * @package plugin\telegram\controller\api
+ * @package plugin\telegram\madeline\controller\api
  */
 class Hook extends Controller
 {
@@ -45,11 +44,9 @@ class Hook extends Controller
                     $imageData = file_get_contents($url);
                     if ($imageData !== false) {
                         $base64Image = "data:image/png;base64,".base64_encode($imageData);
-                                  //$url = json_decode(http_post('http://record.zhouvpn.top/data/api.file/image',['base64'=>$base64Image]),true);
-                     
                     }
                     // 更新数据库中的媒体内容
-                    PluginTelegramChannelContent::mk()
+                    PluginTelegramSourceForward::mk()
                         ->where(['channel_id' => $channelId, 'message_id' => $messageId])
                         ->update(['new_message_id'=>$channelPost['message_id'],'media' => $media,'forward'=>1,'cover'=>$base64Image]);
                 }
@@ -57,11 +54,10 @@ class Hook extends Controller
             if ($channelPost && isset($channelPost['reply_to_message'])){
                 if ($channelPost['text'] == '删除'){
                     $message_id = $channelPost['reply_to_message']['message_id'];
-                    $grouped_id = PluginTelegramChannelContent::mk()->withoutField('cover')->where('new_message_id',$message_id)->value('grouped_id');
-                    PluginTelegramChannelContent::mk()->where('grouped_id',$grouped_id)->delete();
+                    $grouped_id = PluginTelegramSourceForward::mk()->withoutField('cover')->where('new_message_id',$message_id)->value('grouped_id');
+                    PluginTelegramSourceForward::mk()->where('grouped_id',$grouped_id)->delete();
                 }
             }
-            SocketService::sendToAll($result);
         } catch (HttpResponseException $exception) {
             throw $exception;
         } catch (\Exception $exception) {

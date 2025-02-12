@@ -2,13 +2,13 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\controller;
+namespace plugin\telegram\madeline\controller;
 
 use danog\MadelineProto\API;
 use danog\MadelineProto\Exception;
 use danog\MadelineProto\Settings;
-use plugin\telegram\model\PluginTelegramAccount;
-use plugin\telegram\service\MadelineProtoApi;
+use plugin\telegram\madeline\model\PluginTelegramAccount;
+use plugin\telegram\madeline\service\MadelineProtoApi;
 use think\admin\Controller;
 use think\admin\helper\QueryHelper;
 use think\exception\HttpResponseException;
@@ -17,7 +17,7 @@ use \danog\MadelineProto\Settings\AppInfo;
 /**
  * 账号管理
  * Class Account
- * @package plugin\telegram\controller
+ * @package plugin\telegram\madeline\controller
  */
 class Account extends Controller
 {

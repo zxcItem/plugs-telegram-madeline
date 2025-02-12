@@ -2,18 +2,16 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram;
+namespace plugin\telegram\madeline;
 
-use plugin\telegram\command\Channel;
-use plugin\telegram\command\Comment;
-use plugin\telegram\command\BotActive;
-use plugin\telegram\command\Preview;
+use plugin\telegram\madeline\command\Channel;
+use plugin\telegram\madeline\command\Preview;
 use think\admin\Plugin;
 
 /**
  * 组件注册服务
  * @class Service
- * @package plugin\telegram
+ * @package plugin\telegram\madeline
  */
 class Service extends Plugin
 {
@@ -21,13 +19,13 @@ class Service extends Plugin
      * 定义插件名称
      * @var string
      */
-    protected $appName = 'Telegram服务';
+    protected $appName = 'MadelineProto服务';
 
     /**
      * 定义安装包名
      * @var string
      */
-    protected $package = 'xiaochao/plugs-telegram';
+    protected $package = 'xiaochao/plugs-telegram-madeline';
 
     /**
      * 插件服务注册
@@ -35,7 +33,7 @@ class Service extends Plugin
      */
     public function register(): void
     {
-        $this->commands([Channel::class,Comment::class,BotActive::class,Preview::class]);
+        $this->commands([Channel::class,Preview::class]);
     }
 
     /**
@@ -55,24 +53,11 @@ class Service extends Plugin
                 ],
             ],
             [
-                'name' => '账号频道',
+                'name' => '账号资源',
                 'subs' => [
                     ['name' => '账号数据管理', 'icon' => 'layui-icon layui-icon-user', 'node' => "{$code}/account/index"],
-                    ['name' => '经营频道管理', 'icon' => 'iconfont iconfont-similar', 'node' => "{$code}/channel/index"],
-                ],
-            ],
-            [
-                'name' => '资源管理',
-                'subs' => [
                     ['name' => '目标频道管理', 'icon' => 'iconfont iconfont-similar', 'node' => "{$code}/source/index"],
                     ['name' => '目标资源管理', 'icon' => 'layui-icon layui-icon-read', 'node' => "{$code}/content/index"],
-                ],
-            ],
-            [
-                'name' => '发布内容',
-                'subs' => [
-                    ['name' => '发布内容分类', 'icon' => 'iconfont iconfont-similar', 'node' => "{$code}/type/index"],
-                    ['name' => '发布内容管理', 'icon' => 'layui-icon layui-icon-read', 'node' => "{$code}/release/index"],
                 ],
             ],
         ];

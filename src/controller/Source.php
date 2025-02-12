@@ -2,13 +2,12 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\controller;
+namespace plugin\telegram\madeline\controller;
 
-use plugin\telegram\model\PluginTelegramAccount;
-use plugin\telegram\model\PluginTelegramChannel;
-use plugin\telegram\model\PluginTelegramChannelSource;
-use plugin\telegram\service\ConfigService;
-use plugin\telegram\service\TelegramApi;
+use plugin\telegram\madeline\model\PluginTelegramAccount;
+use plugin\telegram\madeline\model\PluginTelegramChannelSource;
+use plugin\telegram\madeline\service\ConfigService;
+use plugin\telegram\madeline\service\TelegramApi;
 use think\admin\Controller;
 use think\admin\helper\QueryHelper;
 use think\exception\HttpResponseException;
@@ -17,7 +16,7 @@ use think\exception\HttpResponseException;
 /**
  * 目标频道管理
  * Class Source
- * @package plugin\telegram\controller
+ * @package plugin\telegram\madeline\controller
  */
 class Source extends Controller
 {
@@ -84,7 +83,6 @@ class Source extends Controller
     {
         if ($this->request->isGet()){
             $this->account = PluginTelegramAccount::getAccount('account_id,title');
-            $this->channel = PluginTelegramChannel::getChannel('channel_id,channel_title');
         }
     }
 

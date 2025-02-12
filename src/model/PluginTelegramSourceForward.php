@@ -2,14 +2,14 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\model;
+namespace plugin\telegram\madeline\model;
 
 /**
  * 目标频道内容
- * Class PluginTelegramChannelContent
- * @package plugin\telegram\model
+ * Class PluginTelegramSourceForward
+ * @package plugin\telegram\madeline\model
  */
-class PluginTelegramChannelContent extends Abs
+class PluginTelegramSourceForward extends Abs
 {
 
     /**
@@ -36,7 +36,7 @@ class PluginTelegramChannelContent extends Abs
      */
     public function media()
     {
-        return $this->hasMany(PluginTelegramChannelContent::class, 'grouped_id', 'grouped_id');
+        return $this->hasMany(PluginTelegramSourceForward::class, 'grouped_id', 'grouped_id');
     }
 
     /**

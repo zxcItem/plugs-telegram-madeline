@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\service;
+namespace plugin\telegram\madeline\service;
 
 
 use think\admin\Service;
@@ -10,7 +10,7 @@ use think\admin\Service;
 /**
  * Telegram Api 接口服务
  * Class TelegramApi
- * @package plugin\telegram\service
+ * @package plugin\telegram\madeline\service
  */
 class TelegramApi extends Service
 {

@@ -2,12 +2,12 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\model;
+namespace plugin\telegram\madeline\model;
 
 /**
  * 目标频道模型
  * Class PluginTelegramChannelSource
- * @package plugin\telegram\model
+ * @package plugin\telegram\madeline\model
  */
 class PluginTelegramChannelSource extends Abs
 {
@@ -41,14 +41,5 @@ class PluginTelegramChannelSource extends Abs
     public function account()
     {
         return $this->hasOne(PluginTelegramAccount::class, 'account_id', 'account_id');
-    }
-
-    /**
-     * 关联频道
-     * @return \think\model\relation\HasOne
-     */
-    public function channel()
-    {
-        return $this->hasOne(PluginTelegramChannel::class, 'channel_id', 'release_channel_id');
     }
 }

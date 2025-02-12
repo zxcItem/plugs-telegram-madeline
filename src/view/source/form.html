@@ -14,19 +14,6 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label color-green">所属频道</label>
-            <div class="layui-input-block">
-                <select class="layui-select" name="release_channel_id">
-                    {foreach $channel as $k=>$v}
-                    {if isset($vo.release_channel_id) and $vo.release_channel_id eq $v.channel_id}
-                    <option selected value="{$v.channel_id}">{$v.channel_title}</option>
-                    {else}
-                    <option value="{$v.channel_id}">{$v.channel_title}</option>
-                    {/if}{/foreach}
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
             <label class="layui-form-label color-green">频道ID</label>
             <div class="layui-input-block">
                 <input name="channel_id" maxlength="20" value="{$vo.channel_id|default=''}" placeholder="请输入频道ID"  type="number" required class="layui-input">

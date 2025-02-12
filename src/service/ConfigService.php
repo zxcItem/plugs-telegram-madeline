@@ -2,20 +2,20 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\service;
+namespace plugin\telegram\madeline\service;
 
 use think\admin\Exception;
 
 /**
  * Telegram配置服务
  * @class ConfigService
- * @package plugin\telegram\service
+ * @package plugin\telegram\madeline\service
  */
 class ConfigService
 {
 
     /**
-     * 投票配置缓存名
+     * 配置缓存名
      * @var string
      */
     private static $skey = 'plugin.telegram.config';

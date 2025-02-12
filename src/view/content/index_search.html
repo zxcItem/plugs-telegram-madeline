@@ -19,20 +19,7 @@
             <input class="layui-input" name="caption" placeholder="请输入内容标题" value="{$get.caption|default=''}">
         </label>
     </div>
-    <div class="layui-form-item layui-inline">
-        <label class="layui-form-label">媒体类型</label>
-        <div class="layui-input-inline">
-            <select class="layui-select" name="type">
-                <option value=''>-- 全部 --</option>
-                {foreach ['photo'=>'图片类型', 'video/mp4'=>'视频类型'] as $k=>$v}
-                {if isset($get.type) and $get.type eq $k.''}
-                <option selected value="{$k}">{$v}</option>
-                {else}
-                <option value="{$k}">{$v}</option>
-                {/if}{/foreach}
-            </select>
-        </div>
-    </div>
+
     <div class="layui-form-item layui-inline">
         <label class="layui-form-label">刷新状态</label>
         <div class="layui-input-inline">
@@ -40,34 +27,6 @@
                 <option value=''>-- 全部 --</option>
                 {foreach ['未刷新内容', '已刷新内容'] as $k=>$v}
                 {if isset($get.forward) and $get.forward eq $k.''}
-                <option selected value="{$k}">{$v}</option>
-                {else}
-                <option value="{$k}">{$v}</option>
-                {/if}{/foreach}
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item layui-inline">
-        <label class="layui-form-label">收录状态</label>
-        <div class="layui-input-inline">
-            <select class="layui-select" name="status">
-                <option value=''>-- 全部 --</option>
-                {foreach ['未收录内容', '已收录内容'] as $k=>$v}
-                {if isset($get.status) and $get.status eq $k.''}
-                <option selected value="{$k}">{$v}</option>
-                {else}
-                <option value="{$k}">{$v}</option>
-                {/if}{/foreach}
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item layui-inline">
-        <label class="layui-form-label">评论状态</label>
-        <div class="layui-input-inline">
-            <select class="layui-select" name="is_replies">
-                <option value=''>-- 全部 --</option>
-                {foreach ['未评论内容', '已评论内容'] as $k=>$v}
-                {if isset($get.is_replies) and $get.is_replies eq $k.''}
                 <option selected value="{$k}">{$v}</option>
                 {else}
                 <option value="{$k}">{$v}</option>

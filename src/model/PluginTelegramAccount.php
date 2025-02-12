@@ -2,12 +2,12 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\model;
+namespace plugin\telegram\madeline\model;
 
 /**
  * 账号模型
  * Class PluginTelegramAccount
- * @package plugin\telegram\model
+ * @package plugin\telegram\madeline\model
  */
 class PluginTelegramAccount extends Abs
 {

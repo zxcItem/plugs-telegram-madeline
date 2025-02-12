@@ -2,12 +2,12 @@
 
 declare (strict_types=1);
 
-namespace plugin\telegram\model;
+namespace plugin\telegram\madeline\model;
 
 /**
  * 敏感词管理
  * Class PluginTelegramBaseKeyword
- * @package plugin\telegram\model
+ * @package plugin\telegram\madeline\model
  */
 class PluginTelegramBaseKeyword extends Abs
 {
