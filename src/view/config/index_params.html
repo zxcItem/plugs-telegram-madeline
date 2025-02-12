@@ -1,0 +1,35 @@
+<form action="{:sysuri()}" class="layui-form-pane layui-form layui-card" data-auto="true" method="post">
+    <div class="layui-card-body padding-left-40">
+        <div class="layui-form-item">
+            <label class="layui-form-label color-green">Bot name</label>
+            <div class="layui-input-block">
+                <input class="layui-input" name="bot_name" value='{$vo.bot_name|default=""}'>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label color-green">Bot Token</label>
+            <div class="layui-input-block">
+                <input class="layui-input" name="bot_token" value='{$vo.bot_token|default=""}'>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label color-green">媒体转发频道</label>
+            <div class="layui-input-block">
+                <input class="layui-input" type="number" name="forward_channel" value='{$vo.forward_channel|default=""}'>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label color-green">内容标题底部导引</label>
+            <div class="layui-input-block">
+                <textarea name="caption" placeholder="请输入内容标题底部导引" class="layui-textarea">{$vo.caption|default=""}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
+    </div>
+</form>

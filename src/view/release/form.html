@@ -1,0 +1,81 @@
+{extend name="main"}
+
+{block name="button"}
+<button data-target-submit class='layui-btn layui-btn-sm'>确认保存</button>
+<button data-target-backup class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确认要取消编辑吗？">取消编辑</button>
+{/block}
+
+{block name='content'}
+<form action="{:sysuri()}" method="post" data-auto="true" class="layui-form layui-card layui-form-pane" data-table-id="ReleaseTable">
+    <div class="layui-card-body">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs12">
+                <label class="layui-form-label color-green">发布频道</label>
+                <div class="layui-input-block">
+                    <select class="layui-select" name="channel_id">
+                        {foreach $channel as $k=>$v}
+                        {if isset($vo.channel_id) and $vo.channel_id eq $v.channel_id}
+                        <option selected value="{$v.channel_id}">{$v.channel_title}</option>
+                        {else}
+                        <option value="{$v.channel_id}">{$v.channel_title}</option>
+                        {/if}{/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label color-green">内容标题</label>
+                <div class="layui-input-block">
+                    <textarea name="caption" placeholder="请输入内容标题" class="layui-textarea">{$vo.caption|default=""}</textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="CommentData">
+            <div class="layui-form-item">
+                <div v-if="list.length>0" class="layui-textarea flex flex-wrap ta-pt-10 ta-pb-0">
+                    <div v-for="x in list" class="flex layui-bg-gray ta-p-10 border-radius-5 ta-mr-10 ta-mb-10 shadow-mini" style="width:160px;align-items: center;">
+                        <div v-if="x.cover" :data-lazy-src="x.cover" data-tips-hover data-tips-image class="uploadimage" :style="{backgroundImage:'url('+x.cover+')'}" style="width:160px;height:160px;align-items: center;"></div>
+                        <div class="padding-top-5">
+                            <a class="layui-icon layui-icon-close color-red" @click="remove(x)"></a>
+                        </div>
+                    </div>
+                </div>
+                <label class="layui-hide"><textarea class="layui-textarea" name="media" readonly>{{JSON.stringify(list)}}</textarea></label>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="submit">确认保存</button>
+            <button class="layui-btn layui-btn-danger" data-confirm="确定要取消编辑吗？" type='button' data-target-backup>取消编辑</button>
+        </div>
+    </div>
+</form>
+
+<label class="layui-hide">
+    <!-- 编辑时来自数据库的默认值-->
+    <textarea id="DefaData" class="layui-textarea">{$vo.media|default=[]|json_encode}</textarea>
+</label>
+
+<script>
+    $(function () {
+        require(['vue'], (Vue) => {
+            let app = new Vue({
+                el: '#CommentData',
+                data: {
+                    list: JSON.parse($('#DefaData').val() || '[]')
+                },
+                methods: {
+                    // 移除该商品
+                    remove(x) {
+                        $.msg.confirm('确认要移除该媒体吗？', function () {
+                            app.list.splice(app.list.indexOf(x), 1)
+                        })
+                    },
+                }
+            })
+        })
+    })
+</script>
+{/block}

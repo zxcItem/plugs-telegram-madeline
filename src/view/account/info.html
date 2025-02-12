@@ -1,0 +1,32 @@
+<form action="{:sysuri('submitCode')}" method="post" data-auto="true" class="layui-form-pane layui-tab layui-form layui-card">
+    <div class="layui-card-body padding-left-40">
+        <div class="layui-form-item">
+            <div class="relative block">
+                <table class="layui-table border-0 margin-0">
+                    <colgroup>
+                        <col style="width:20%">
+                        <col style="width:80%">
+                    </colgroup>
+                    <thead>
+                    <tr class="layui-bg-cyan notselect">
+                        <th class="text-left nowrap">属性</th>
+                        <th class="text-left nowrap">数值</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>用户ID</td><td>{$user.id|default=''}</td></tr>
+                    <tr><td>用户名字</td><td>{$user.first_name|default=''}</td></tr>
+                    <tr><td>用户名</td><td>{$user.username|default=''}</td></tr>
+                    <tr><td>电话号码</td><td>{$user.phone|default=''}</td></tr>
+                    <tr><td>在线状态</td><td>{$user.status._|default=''}</td></tr>
+                    <tr><td>过期时间</td><td>{$user.status.expires|default=''|date='Y-m-d H:i:s'}</td></tr>
+                    <tr><td>是否验证账号</td><td>{if $user.verified}是{else}否{/if}</td></tr>
+                    <tr><td>是否机器账号</td><td>{if $user.bot}是{else}否{/if}</td></tr>
+                    <tr><td>是否诈骗账户</td><td>{if $user.scam}是{else}否{/if}</td></tr>
+                    <tr><td>是否假账号</td><td>{if $user.fake}是{else}否{/if}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

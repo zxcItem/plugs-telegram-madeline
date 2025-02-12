@@ -1,0 +1,83 @@
+{extend name='table'}
+
+{block name="button"}
+
+<!--{if auth("preview")}-->
+<a data-table-id="SourceContentTable" class="layui-btn layui-btn-sm layui-btn-primary" data-queue="{:url('preview')}">自动刷新资源</a>
+<!--{/if}-->
+
+<!--{if auth("comment")}-->
+<a data-table-id="SourceContentTable" class="layui-btn layui-btn-sm layui-btn-primary" data-queue="{:url('comment')}">自动刷新评论</a>
+<!--{/if}-->
+
+<!--{if auth("remove")}-->
+<a data-confirm="确定永久删除吗？" data-table-id="SourceContentTable" data-action='{:url("remove")}' data-rule="id#{id}" class='layui-btn layui-btn-sm layui-btn-primary'>批量删除</a>
+<!--{/if}-->
+
+{/block}
+
+{block name="content"}
+<div class="layui-tab layui-tab-card">
+    <div class="layui-tab-content">
+        {include file='content/index_search'}
+        <table id="SourceContentTable" data-url="{:request()->url()}" data-target-search="form.form-search"></table>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        let $table = $('#SourceContentTable').layTable({
+            even: true, height: 'full',
+            sort: {field: 'status asc,id asc', type: 'desc'},
+            cols: [[
+                {field: 'id', hide: true},
+                {checkbox: true, fixed: true},
+                {field: 'account', title: '采集账号', width: 100, align: 'center',templet: '<div>{{d.account.title||""}}</div>'},
+                {field: 'channel', title: '所属频道', width: 150, align: 'center',templet: '<div>{{d.channel.channel_title||""}}</div>'},
+                {field: 'cate', title: '内容类型', width: 100, align: 'center',templet:function (d) {
+                        return d.cate ? '评论' : '内容';
+                    }},
+                {field: 'grouped_id', title: '组合内容ID', width: 150, align: 'center',sort: true},
+                {field: 'message_id', title: '来源ID', width: 100, align: 'center'},
+                {field: 'caption', title: '内容描述', minWidth: 200, align: 'center'},
+                {field: 'type', title: '媒体类型', width: 100, align: 'center'},
+                {field: 'forward', title: '转发', width: 80, align: 'center', sort: true, templet:function (d) {
+                        d.show = "{:url('plugin-telegram/content/forward')}";
+                        if (d.forward >0){
+                            return '<i class="layui-icon layui-icon-success color-red" ></i>';
+                        }else {
+                            return laytpl('<div><a data-action="{{d.show}}?id={{d.id}}"><i class="layui-icon layui-icon-refresh color-green"></i></a></div>').render(d)
+                        }
+                    }},
+                {field: 'status', title: '收录', width: 80, align: 'center', sort: true, templet:function (d) {
+                        return d.status ? '<i class="layui-icon layui-icon-success color-red" ></i>' : '';
+                    }},
+                {field: 'is_replies', title: '评论', width: 80, align: 'center',sort: true, templet:function (d) {
+                        return d.is_replies ? '<i class="layui-icon layui-icon-success color-red" ></i>' : '';
+                    }},
+                {field: 'replies', title: '数量', width: 80, align: 'center'},
+                {field: 'replies_status', title: '采集', width: 80, align: 'center',sort: true, templet:function (d) {
+                        return d.replies_status ? '<i class="layui-icon layui-icon-success color-red" ></i>' : '';
+                    }},
+                {field: 'date', title: '发送时间', width: 170, align: 'center', sort: true},
+                {field: 'create_at', title: '创建时间', align: 'center', width: 170, sort: true},
+                {toolbar: '#toolbar', title: '操作面板', align: 'center', width: 200, fixed: 'right'}
+            ]]
+        });
+    });
+</script>
+
+<script type="text/html" id="toolbar">
+
+    <!-- {if auth("edit")} -->
+    <a class="layui-btn layui-btn-sm" data-modal='{:url("edit")}?id={{d.id}}'>编 辑</a>
+    <!--{/if}-->
+    <!--{if auth("announce")}-->
+    <a class="layui-btn layui-btn-sm layui-btn-primary" data-open="{:url('announce')}?id={{d.id}}">详 情</a>
+    <!--{/if}-->
+    <!--{if auth("remove")}-->
+    <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要永久删除吗？" data-action="{:url('remove')}" data-value="id#{{d.id}}">删 除</a>
+    <!--{/if}-->
+
+</script>
+{/block}

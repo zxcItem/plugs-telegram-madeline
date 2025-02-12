@@ -1,0 +1,102 @@
+{extend name='table'}
+
+{block name="button"}
+{if isset($type) and $type eq 'index'}
+<!--{if auth("add")}-->
+<button data-modal='{:url("add")}' class='layui-btn layui-btn-sm layui-btn-primary'>添加频道</button>
+<!--{/if}-->
+<!--{if auth("state")}-->
+<a data-confirm="确定要批量禁用吗？" data-table-id="SourceItemTable" data-action="{:url('state')}" data-rule="id#{id};status#0" class='layui-btn layui-btn-sm layui-btn-primary'>批量禁用</a>
+<!--{/if}-->
+{else}
+<!--{if auth("state")}-->
+<a data-confirm="确定要批量恢复吗？" data-table-id="SourceItemTable" data-action="{:url('state')}" data-rule="id#{id};status#1" class='layui-btn layui-btn-sm layui-btn-primary'>批量恢复</a>
+<!--{/if}-->
+<!--{if auth("remove")}-->
+<a data-confirm="确定永久删除吗？" data-table-id="SourceItemTable" data-action='{:url("remove")}' data-rule="id#{id}" class='layui-btn layui-btn-sm layui-btn-primary'>批量删除</a>
+<!--{/if}-->
+{/if}
+{/block}
+
+{block name="content"}
+<div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        {foreach ['index'=>'频道管理','recycle'=>'回 收 站'] as $k=>$v}{if isset($type) and $type eq $k}
+        <li data-open="{:url('index')}?type={$k}" class="layui-this">{$v}</li>
+        {else}
+        <li data-open="{:url('index')}?type={$k}">{$v}</li>
+        {/if}{/foreach}
+    </ul>
+    <div class="layui-tab-content">
+        {include file='source/index_search'}
+        <table id="SourceItemTable" data-url="{:request()->url()}" data-target-search="form.form-search"></table>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        let $table = $('#SourceItemTable').layTable({
+            even: true, height: 'full',
+            sort: {field: 'sort desc,id', type: 'desc'},
+            cols: [[
+                {field: 'id', hide: true},
+                {checkbox: true, fixed: true},
+                {field: 'sort', title: '排序', width: 80, align: 'center', sort: true, templet: '#SortInputTpl'},
+                {field: 'account', title: '所属账号', width: 100, align: 'center', templet: '<div>{{d.account.title||""}}</div>'},
+                {field: 'channel', title: '所属频道', minWidth: 100, align: 'center', templet: '<div>{{d.channel.channel_title||""}}</div>'},
+                {field: 'channel_title', title: '频道标题', minWidth: 100, align: 'center'},
+                {field: 'channel_type', title: '监测类型', width: 100, align: 'center', templet:function (d) {
+                    return d.channel_type ? '历史数据' : '最新数据';
+                    }},
+                {field: 'limit_number', title: '限制数量', width: 100, align: 'center'},
+                {field: 'last_message_id', title: '消息ID', width: 100, align: 'center'},
+                {field: 'remark', title: '频道备注', minWidth: 100, align: 'center'},
+                {field: 'status', title: '频道状态', align: 'center', width: 110, templet: '#StatusSwitchTpl'},
+                {toolbar: '#toolbar', title: '操作面板', align: 'center', width: 150, fixed: 'right'}
+            ]]
+        });
+
+        // 数据状态切换操作
+        layui.form.on('switch(StatusSwitch)', function (obj) {
+            let data = {id: obj.value, status: obj.elem.checked > 0 ? 1 : 0};
+            $.form.load("{:url('state')}", data, 'post', function (ret) {
+                let fn = () => $table.trigger('reload');
+                ret.code > 0 ? fn() : $.msg.error(ret.info, 3, fn)
+                return false;
+            }, false);
+        });
+    });
+</script>
+
+<!-- 数据状态切换模板 -->
+<script type="text/html" id="StatusSwitchTpl">
+    <!--{if auth("state")}-->
+    <input type="checkbox" value="{{d.id}}" lay-skin="switch" lay-text="已激活|已禁用" lay-filter="StatusSwitch" {{-d.status>0?'checked':''}}>
+    <!--{else}-->
+    {{-d.status ? '<b class="color-green">已启用</b>' : '<b class="color-red">已禁用</b>'}}
+    <!--{/if}-->
+</script>
+
+<!-- 列表排序权重模板 -->
+<script type="text/html" id="SortInputTpl">
+    <input type="number" min="0" data-blur-number="0" data-action-blur="{:sysuri()}" data-value="id#{{d.id}};action#sort;sort#{value}" data-loading="false" value="{{d.sort}}" class="layui-input text-center">
+</script>
+
+<script type="text/html" id="toolbar">
+    {if isset($type) and $type eq 'index'}
+    <!-- {if auth("channel")} -->
+    <a class="layui-btn layui-btn-sm" data-queue='{:url("channel")}?id={{d.id}}&title={{d.channel_title}}'>启 动</a>
+    <!--{/if}-->
+    <!-- {if auth("edit")} -->
+    <a class="layui-btn layui-btn-sm" data-modal='{:url("edit")}?id={{d.id}}'>编 辑</a>
+    <!--{/if}-->
+    {else}
+    <!--{if auth("edit")} -->
+    <a class="layui-btn layui-btn-sm" data-modal='{:url("edit")}?id={{d.id}}'>编 辑</a>
+    <!--{/if}-->
+    <!--{if auth("remove")}-->
+    <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要永久删除吗？" data-action="{:url('remove')}" data-value="id#{{d.id}}">删 除</a>
+    <!--{/if}-->
+    {/if}
+</script>
+{/block}

@@ -1,0 +1,16 @@
+<form action="{:sysuri('submitCode')}" method="post" data-auto="true" class="layui-form-pane layui-tab layui-form layui-card">
+    <div class="layui-card-body padding-left-40">
+        <div class="layui-form-item">
+            <label class="layui-form-label color-green">验证码</label>
+            <div class="layui-input-block">
+                <input name="code" value="{$vo.code|default=''}" placeholder="请输入验证码" required class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    {notempty name='vo.account_id'}<input type='hidden' value='{$vo.account_id}' name='account_id'>{/notempty}
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>提交验证码</button>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+<form action="{:sysuri()}" autocomplete="off" class="layui-form layui-form-pane form-search" method="get" onsubmit="return false">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">用户姓名</label>
+        <label class="layui-input-inline">
+            <input class="layui-input" name="username" placeholder="请输入用户姓名" value="{$get.username|default=''}">
+        </label>
+    </div>
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">注册手机</label>
+        <label class="layui-input-inline">
+            <input class="layui-input" name="phone_number" placeholder="请输入注册手机" value="{$get.phone_number|default=''}">
+        </label>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">创建时间</label>
+        <div class="layui-input-inline">
+            <input class="layui-input" data-date-range name="create_at" placeholder="请选择创建时间" value="{$get.create_at|default=''}">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+        <button class="layui-btn layui-btn-primary" data-form-export="{:url('index')}?type={$type|default='index'}" type="button">
+            <i class="layui-icon layui-icon-export"></i> 导 出
+        </button>
+    </div>
+</form>
+
+<script>
+    require(['excel'], function (excel) {
+        excel.bind(function (data) {
+            // 设置表格内容
+            data.forEach(function (item, index) {
+                data[index] = [
+                    {v: item.id, t: 'n'},
+                    item.account_id || '-',
+                    item.username || '-',
+                    item.phone_number || '-',
+                    item.create_at || '',
+                ];
+            });
+            // 设置表头内容
+            data.unshift(['ID', '唯一标识', '用户姓名', '绑定手机','创建时间']);
+            // 设置表格样式
+            return data;
+        }, '账号数据' + layui.util.toDateString(Date.now(), '_yyyyMMdd_HHmmss'));
+    });
+</script>
