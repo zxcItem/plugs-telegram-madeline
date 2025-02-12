@@ -36,20 +36,8 @@ class Content extends Controller
         }, function (QueryHelper $query) {
             $query->with(['channel'=>function($channel){
                 $channel->field('channel_id,channel_title');
-            },'account'])->equal('channel_id,status,forward')->like('caption')->dateBetween('create_at');
+            },'account'])->equal('channel_id,forward')->like('caption')->dateBetween('create_at');
         });
-    }
-
-    /**
-     * 修改内容状态
-     * @auth true
-     */
-    public function state()
-    {
-        PluginTelegramSourceForward::mSave($this->_vali([
-            'status.in:0,1'  => '状态值范围异常！',
-            'status.require' => '状态值不能为空！',
-        ]));
     }
 
     /**

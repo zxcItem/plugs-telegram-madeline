@@ -43,7 +43,6 @@
                 {checkbox: true, fixed: true},
                 {field: 'sort', title: '排序', width: 80, align: 'center', sort: true, templet: '#SortInputTpl'},
                 {field: 'account', title: '所属账号', width: 100, align: 'center', templet: '<div>{{d.account.title||""}}</div>'},
-                {field: 'channel', title: '所属频道', minWidth: 100, align: 'center', templet: '<div>{{d.channel.channel_title||""}}</div>'},
                 {field: 'channel_title', title: '频道标题', minWidth: 100, align: 'center'},
                 {field: 'channel_type', title: '监测类型', width: 100, align: 'center', templet:function (d) {
                     return d.channel_type ? '历史数据' : '最新数据';

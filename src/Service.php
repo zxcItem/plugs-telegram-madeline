@@ -46,15 +46,9 @@ class Service extends Plugin
         // 设置插件菜单
         return [
             [
-                'name' => '属性配置',
-                'subs' => [
-                    ['name' => '参数属性管理', 'icon' => 'layui-icon layui-icon-set', 'node' => "{$code}/config/index"],
-                    ['name' => '敏感词汇管理', 'icon' => 'iconfont iconfont-warn_light', 'node' => "{$code}/keyword/index"]
-                ],
-            ],
-            [
                 'name' => '账号资源',
                 'subs' => [
+                    ['name' => '敏感词汇管理', 'icon' => 'iconfont iconfont-warn_light', 'node' => "{$code}/keyword/index"],
                     ['name' => '账号数据管理', 'icon' => 'layui-icon layui-icon-user', 'node' => "{$code}/account/index"],
                     ['name' => '目标频道管理', 'icon' => 'iconfont iconfont-similar', 'node' => "{$code}/source/index"],
                     ['name' => '目标资源管理', 'icon' => 'layui-icon layui-icon-read', 'node' => "{$code}/content/index"],

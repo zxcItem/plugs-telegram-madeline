@@ -2,7 +2,7 @@
 
 namespace plugin\telegram\madeline\service;
 
-use danog\MadelineProto\Exception;
+use plugin\telegram\madeline\model\PluginTelegramBaseKeyword;
 use think\admin\extend\CodeExtend;
 use think\admin\Service;
 
@@ -30,6 +30,7 @@ class TelegramMessage extends Service
                 if (isset($message['_']) && ($message['_'] === 'messageService' || isset($message['fwd_from']))) {
                     continue;  // 跳过符合条件的消息
                 }
+                if (self::instance()->checkKeyword($message['message'])) continue;
                 $mediaMessage = [];
                 if (isset($message['media']) && !empty($message['media'])) {
                     if (!in_array($message['media']['_'], ['messageMediaPhoto', 'messageMediaDocument'])) continue;
@@ -56,8 +57,30 @@ class TelegramMessage extends Service
             'account_id'   => $channel['account_id'],
             'message_id'   => $message['id'],
             'grouped_id'   => $grouped_id,
-            'caption'      => $message['message'] ?? '',
             'date'         => $message['date'] ?? 0,
         ];
+    }
+
+    /**
+     * 过滤敏感词
+     * @param $text
+     * @return bool
+     */
+    public function checkKeyword($text)
+    {
+        if ($text){
+            $text = strip_tags($text);
+            $sensitiveWords = $this->app->cache->get('telegram_sensitive_keywords');
+            if (!$sensitiveWords) {
+                $sensitiveWords = PluginTelegramBaseKeyword::keyword();
+                $this->app->cache->set('telegram_sensitive_keywords', $sensitiveWords,60);
+            }
+            foreach ($sensitiveWords as $word) {
+                if (strpos($text, $word) !== false) {
+                    return true; // 如果包含敏感词，则返回 true
+                }
+            }
+        }
+        return false;
     }
 }

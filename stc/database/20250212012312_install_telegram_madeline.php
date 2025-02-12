@@ -3,7 +3,7 @@
 use think\admin\extend\PhinxExtend;
 use think\migration\Migrator;
 
-class InstallTelegram extends Migrator
+class InstallTelegramMadeline extends Migrator
 {
     /**
      * Change Method.
