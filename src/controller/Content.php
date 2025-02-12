@@ -9,6 +9,7 @@ use plugin\telegram\madeline\model\PluginTelegramChannelSource;
 use plugin\telegram\madeline\service\ConfigService;
 use plugin\telegram\madeline\service\MadelineProtoApi;
 use think\admin\Controller;
+use think\admin\Exception;
 use think\admin\helper\QueryHelper;
 use think\exception\HttpResponseException;
 
@@ -88,6 +89,23 @@ class Content extends Controller
             throw $exception;
         } catch (\Exception $exception) {
             $this->error($exception->getMessage());
+        }
+    }
+
+    /**
+     * 刷新配置
+     * @auth true
+     * @return void
+     * @throws Exception
+     */
+    public function params()
+    {
+        if ($this->request->isGet()) {
+            $this->vo = ConfigService::get();
+            $this->fetch('index_params');
+        } else {
+            ConfigService::set($this->request->post());
+            $this->success('配置更新成功！');
         }
     }
 }

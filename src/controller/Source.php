@@ -122,21 +122,4 @@ class Source extends Controller
         $data = $this->_vali(['id.require' => 'ID不可为空！','title.require' => '标题不可为空！']);
         $this->_queue("启动频道【{$data['title']}】采集任务", "plugin:telegram:channel", 0, ['id'=>$data['id']],0,3600);
     }
-
-    /**
-     * 刷新配置
-     * @auth true
-     * @return void
-     * @throws Exception
-     */
-    public function params()
-    {
-        if ($this->request->isGet()) {
-            $this->vo = ConfigService::get();
-            $this->fetch('index_params');
-        } else {
-            ConfigService::set($this->request->post());
-            $this->success('配置更新成功！');
-        }
-    }
 }

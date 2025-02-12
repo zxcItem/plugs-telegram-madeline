@@ -38,7 +38,7 @@
                 {field: 'message_id', title: '来源ID', width: 100, align: 'center'},
                 {field: 'caption', title: '内容描述', minWidth: 200, align: 'center'},
                 {field: 'forward', title: '转发', width: 80, align: 'center', sort: true, templet:function (d) {
-                        d.show = "{:url('plugin-telegram/content/forward')}";
+                        d.show = "{:url('plugin-telegram-madeline/content/forward')}";
                         if (d.forward >0){
                             return '<i class="layui-icon layui-icon-success color-red" ></i>';
                         }else {
