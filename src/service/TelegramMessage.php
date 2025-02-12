@@ -75,7 +75,7 @@ class TelegramMessage extends Service
             $sensitiveWords = $this->app->cache->get('telegram_sensitive_keywords');
             if (!$sensitiveWords) {
                 $sensitiveWords = PluginTelegramBaseKeyword::keyword();
-                $this->app->cache->set('telegram_sensitive_keywords', $sensitiveWords,60);
+                $this->app->cache->set('telegram_sensitive_keywords', $sensitiveWords,600);
             }
             foreach ($sensitiveWords as $word) {
                 if (strpos($text, $word) !== false) {
