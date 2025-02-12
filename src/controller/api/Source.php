@@ -4,7 +4,9 @@ declare (strict_types=1);
 
 namespace plugin\telegram\madeline\controller\api;
 
+use plugin\telegram\madeline\model\PluginTelegramSourceForward;
 use plugin\telegram\madeline\service\MadelineProtoApi;
+use plugin\telegram\madeline\service\RedisService;
 use plugin\telegram\madeline\service\TelegramApi;
 use think\admin\Controller;
 use think\exception\HttpResponseException;
