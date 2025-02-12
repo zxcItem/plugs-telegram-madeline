@@ -95,7 +95,7 @@ class TelegramMessage extends Service
     public static function redisCache($grouped_id,$message_id)
     {
         $redis = RedisService::instance()->get("GroupedId:{$grouped_id}:{$message_id}");
-        if ($redis !== false){
+        if ($redis){
             return true;
         }
         return false;
