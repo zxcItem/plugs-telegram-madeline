@@ -105,8 +105,8 @@ class Channel extends Command
         $this->app->db->transaction(function () use ($contentMessage,$offset_id) {
             if ($contentMessage){
                 PluginTelegramSourceForward::mk()->saveAll($contentMessage);
+                PluginTelegramChannelSource::mk()->where('channel_id',$this->channel['channel_id'])->update(['last_message_id'=>$offset_id]);
             }
-            PluginTelegramChannelSource::mk()->where('channel_id',$this->channel['channel_id'])->update(['last_message_id'=>$offset_id]);
         });
     }
 }
