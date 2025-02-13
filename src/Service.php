@@ -50,8 +50,8 @@ class Service extends Plugin
                 'subs' => [
                     ['name' => '敏感词汇管理', 'icon' => 'iconfont iconfont-warn_light', 'node' => "{$code}/keyword/index"],
                     ['name' => '账号数据管理', 'icon' => 'layui-icon layui-icon-user', 'node' => "{$code}/account/index"],
-                    ['name' => '目标频道管理', 'icon' => 'iconfont iconfont-similar', 'node' => "{$code}/source/index"],
-                    ['name' => '目标资源管理', 'icon' => 'layui-icon layui-icon-read', 'node' => "{$code}/content/index"],
+                    ['name' => '网络素材频道', 'icon' => 'iconfont iconfont-similar', 'node' => "{$code}/source/index"],
+                    ['name' => '网络素材资源', 'icon' => 'layui-icon layui-icon-read', 'node' => "{$code}/content/index"],
                 ],
             ],
         ];

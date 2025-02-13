@@ -14,14 +14,14 @@ use think\admin\helper\QueryHelper;
 use think\exception\HttpResponseException;
 
 /**
- * 目标频道资源
+ * 网络素材资源
  * Class Content
  * @package plugin\telegram\madeline\controller
  */
 class Content extends Controller
 {
     /**
-     * 目标频道内容
+     * 网络素材资源
      * @return void
      * @auth true
      * @menu true
@@ -32,7 +32,7 @@ class Content extends Controller
     public function index()
     {
         PluginTelegramSourceForward::mQuery()->layTable(function () {
-            $this->title = '目标频道资源';
+            $this->title = '网络素材资源';
             $this->source = PluginTelegramChannelSource::mk()->column('channel_title','channel_id');
         }, function (QueryHelper $query) {
             $query->with(['channel'=>function($channel){

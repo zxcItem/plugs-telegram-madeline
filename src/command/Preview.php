@@ -45,11 +45,10 @@ class Preview extends Command
                 MadelineProtoApi::forwardMessages($content['account_id'],$forward_channel,$content['channel_id'],$message,true,true);
                 PluginTelegramSourceForward::mk()
                     ->where('channel_id',$content['channel_id'])->whereIn('message_id',$message)->update(['forward'=>1]);
-                $this->setQueueSuccess("资源转发成功！");
             }
-            $this->setQueueSuccess("暂无资源！");
         } catch (\Exception $exception) {
             $this->setQueueError($exception->getMessage());
         }
+        $this->setQueueSuccess("资源转发成功！");
     }
 }

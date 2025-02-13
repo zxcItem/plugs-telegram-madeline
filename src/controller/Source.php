@@ -11,7 +11,7 @@ use think\admin\helper\QueryHelper;
 
 
 /**
- * 目标频道管理
+ * 网络素材频道
  * Class Source
  * @package plugin\telegram\madeline\controller
  */
@@ -19,7 +19,7 @@ class Source extends Controller
 {
 
     /**
-     * 目标频道管理
+     * 网络素材频道
      * @return void
      * @auth true
      * @menu true
@@ -31,7 +31,7 @@ class Source extends Controller
     {
         $this->type = $this->get['type'] ?? 'index';
         PluginTelegramChannelSource::mQuery()->layTable(function () {
-            $this->title = '目标频道管理';
+            $this->title = '网络素材频道';
         }, function (QueryHelper $query) {
             $query->with(['account'=>function($account){
                 $account->field('title,account_id');

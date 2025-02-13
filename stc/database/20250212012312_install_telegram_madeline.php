@@ -106,7 +106,7 @@ class InstallTelegramMadeline extends Migrator
     }
 
     /**
-     * 目标频道内容
+     * 网络素材资源
      * @class PluginTelegramSourceForward
      * @table plugin_telegram_source_forward
      * @return void
@@ -115,7 +115,7 @@ class InstallTelegramMadeline extends Migrator
     {
         // 创建数据表对象
         $table = $this->table('plugin_telegram_source_forward', [
-            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '目标频道内容',
+            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '网络素材资源',
         ]);
         PhinxExtend::upgrade($table, [
             ['channel_id', 'biginteger', ['default' => 0, 'null' => true, 'comment' => '来源频道ID']],
