@@ -41,7 +41,7 @@ class Preview extends Command
             }])->find()->toArray();
             if (isset($content['media'])) {
                 $message = array_column($content['media'],'message_id');
-                $forward_channel = ConfigService::get('channel')['forward'];
+                $forward_channel = ConfigService::get('channel_forward');
                 MadelineProtoApi::forwardMessages($content['account_id'],$forward_channel,$content['channel_id'],$message,true,true);
                 PluginTelegramSourceForward::mk()
                     ->where('channel_id',$content['channel_id'])->whereIn('message_id',$message)->update(['forward'=>1]);
