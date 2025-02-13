@@ -158,4 +158,22 @@ class Source extends Controller
             $this->error($exception->getMessage());
         }
     }
+
+    /**
+     * 获取当前用户对话列表
+     */
+    public function getDialogs()
+    {
+        try {
+            $map = $this->_vali([
+                'account_id.require'  => '账号ID不可为空！'
+            ]);
+            $response = MadelineProtoApi::getDialogs($map['account_id']);
+            $this->success('获取成功',$response);
+        } catch (HttpResponseException $exception) {
+            throw $exception;
+        } catch (\Exception $exception) {
+            $this->error($exception->getMessage());
+        }
+    }
 }

@@ -153,4 +153,24 @@ class MadelineProtoApi extends Service
             'background' => $background
         ]);
     }
+
+    /**
+     * 获取当前用户对话列表
+     * @param bool $account_id 排除固定对话
+     * @param bool $exclude_pinned
+     * @return array
+     * @throws Exception
+     */
+    public static function getDialogs($account_id,$exclude_pinned = true)
+    {
+        $madeline = self::initMadelineProto($account_id);
+        return $madeline->messages->getDialogs([
+            'exclude_pinned' => $exclude_pinned,
+            'folder_id' => 0,
+            'offset_date' => 0,
+            'offset_id' => 0,
+            'offset_peer' => null,
+            'limit' => 20
+        ]);
+    }
 }
