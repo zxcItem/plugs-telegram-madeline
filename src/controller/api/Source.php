@@ -4,10 +4,7 @@ declare (strict_types=1);
 
 namespace plugin\telegram\madeline\controller\api;
 
-use plugin\telegram\madeline\model\PluginTelegramSourceForward;
 use plugin\telegram\madeline\service\MadelineProtoApi;
-use plugin\telegram\madeline\service\RedisService;
-use plugin\telegram\madeline\service\TelegramApi;
 use think\admin\Controller;
 use think\exception\HttpResponseException;
 
@@ -72,44 +69,6 @@ class Source extends Controller
                 'replies.require'     => '评论数量不可为空！'
             ]);
             $response = MadelineProtoApi::ChannelMessageComments($channel);
-            $this->success('获取成功',$response);
-        } catch (HttpResponseException $exception) {
-            throw $exception;
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
-        }
-    }
-
-    /**
-     * 获取文件地址
-     */
-    public function file()
-    {
-        try {
-            $file = $this->_vali([
-                'file_id.require'  => '文件ID不可为空！',
-                'token.require'    => 'TOKEN不可为空！'
-            ]);
-            $response = TelegramApi::getFile($file['file_id'],$file['token']);
-            $this->success('获取成功',$response);
-        } catch (HttpResponseException $exception) {
-            throw $exception;
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
-        }
-    }
-
-    /**
-     * 获取文件原始ID
-     */
-    public function getFileId()
-    {
-        try {
-            $file = $this->_vali([
-                'media.require'      => 'ID不可为空！',
-                'account_id.require' => '账号ID不可为空！',
-            ]);
-            $response = MadelineProtoApi::getOriginalFileId($file['account_id'],$file['media']);
             $this->success('获取成功',$response);
         } catch (HttpResponseException $exception) {
             throw $exception;

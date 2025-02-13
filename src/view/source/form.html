@@ -82,27 +82,3 @@
         <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
     </div>
 </form>
-<script>
-    layui.use(['form', 'jquery'], function() {
-        var $ = layui.$;
-        // 监听点击事件
-        $('[lay-affix="channel_name"]').on('click', function() {
-            var inputElem = $('#channel_name');
-            var inputValue = inputElem.val();
-            if (inputValue) {
-                var apiBaseUrl = window.location.origin;  // 获取当前域名
-                var apiUrl = apiBaseUrl + '/plugin-telegram-madeline/source/getChannelID';
-                $.ajax({
-                    url: apiUrl,
-                    type: 'POST',
-                    data: {
-                        channel_name: inputValue
-                    },
-                    success: function(response) {
-                        $('input[name="channel_id"]').val(response);
-                    },
-                });
-            }
-        });
-    });
-</script>

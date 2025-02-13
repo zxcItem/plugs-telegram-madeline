@@ -1,25 +1,18 @@
 <form action="{:sysuri()}" class="layui-form-pane layui-form layui-card" data-auto="true" method="post">
     <div class="layui-card-body padding-left-40">
         <div class="layui-form-item">
-            <label class="layui-form-label color-green">Bot name</label>
-            <div class="layui-input-block">
-                <input class="layui-input" name="bot_name" value='{$vo.bot_name|default=""}'>
-            </div>
-        </div>
-        <div class="layui-form-item">
             <label class="layui-form-label color-green">Bot Token</label>
             <div class="layui-input-block">
-                <input class="layui-input" name="bot_token" value='{$vo.bot_token|default=""}'>
+                <input class="layui-input" name="bot.token" value='{$vo.bot.token|default=""}'>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label color-green">媒体转发频道</label>
+            <label class="layui-form-label color-green">素材转发频道</label>
             <div class="layui-input-block">
-                <input class="layui-input" type="number" name="forward_channel" value='{$vo.forward_channel|default=""}'>
+                <input class="layui-input" type="number" name="channel.forward" value='{$vo.channel.forward|default=""}'>
             </div>
         </div>
     </div>
-
     <div class="hr-line-dashed"></div>
 
     <div class="layui-form-item text-center">

@@ -6,12 +6,8 @@ namespace plugin\telegram\madeline\controller;
 
 use plugin\telegram\madeline\model\PluginTelegramAccount;
 use plugin\telegram\madeline\model\PluginTelegramChannelSource;
-use plugin\telegram\madeline\service\ConfigService;
-use plugin\telegram\madeline\service\TelegramApi;
 use think\admin\Controller;
-use think\admin\Exception;
 use think\admin\helper\QueryHelper;
-use think\exception\HttpResponseException;
 
 
 /**
@@ -92,24 +88,6 @@ class Source extends Controller
     public function remove()
     {
         PluginTelegramChannelSource::mDelete();
-    }
-
-    /**
-     * 获取频道的id
-     * @return mixed
-     */
-    public function getChannelID()
-    {
-        try {
-            $channel_name = $this->request->post('channel_name');
-            $token = ConfigService::get('bot_token');
-            $channel = TelegramApi::getChat($token,$channel_name);
-            return $channel['id'];
-        } catch (HttpResponseException $exception) {
-            throw $exception;
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
-        }
     }
 
 

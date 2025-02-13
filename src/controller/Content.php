@@ -69,7 +69,7 @@ class Content extends Controller
     }
 
     /**
-     * 刷新媒体信息数据
+     * 转发素材
      * @auth true
      */
     public function forward()
@@ -81,7 +81,7 @@ class Content extends Controller
             }])->find()->toArray();
             if (isset($content['media'])) {
                 $message = array_column($content['media'],'message_id');
-                $forward_channel = ConfigService::get('forward_channel');
+                $forward_channel = ConfigService::get('channel.forward');
                 MadelineProtoApi::forwardMessages($content['account_id'],$forward_channel,$content['channel_id'],$message,true,true);
                 $this->success('刷新媒体数据成功！');
             }

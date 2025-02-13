@@ -72,7 +72,7 @@ class InstallTelegramMadeline extends Migrator
 
 
     /**
-     * 目标频道
+     * 网络素材频道
      * @class PluginTelegramChannelSource
      * @table plugin_telegram_channel_source
      * @return void
@@ -81,7 +81,7 @@ class InstallTelegramMadeline extends Migrator
     {
         // 创建数据表对象
         $table = $this->table('plugin_telegram_channel_source', [
-            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '目标频道',
+            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '网络素材频道',
         ]);
 
         PhinxExtend::upgrade($table, [
@@ -121,7 +121,7 @@ class InstallTelegramMadeline extends Migrator
             ['channel_id', 'biginteger', ['default' => 0, 'null' => true, 'comment' => '来源频道ID']],
             ['account_id', 'biginteger', ['default' => 0, 'null' => true, 'comment' => '采集账号ID']],
             ['message_id', 'biginteger', ['default' => 0, 'null' => true, 'comment' => '来源频道消息ID']],
-            ['grouped_id', 'biginteger', ['default' => 0, 'null' => true, 'comment' => '组合消息ID']],
+            ['grouped_id', 'string', ['limit' => 32, 'default' => NULL, 'null' => true, 'comment' => '组合消息ID']],
             ['caption', 'text', ['default' => NULL, 'null' => true, 'comment' => '消息内容']],
             ['date', 'integer', ['limit' => 32, 'default' => 0, 'null' => true, 'comment' => '发送时间']],
             ['forward', 'integer', ['limit' => 1, 'default' => 0, 'null' => true, 'comment' => '发布状态(0未转发,1已转发)']],
