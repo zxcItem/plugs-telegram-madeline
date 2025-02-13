@@ -166,7 +166,13 @@ class Source extends Controller
     {
         try {
             $map = $this->_vali([
-                'account_id.require'  => '账号ID不可为空！'
+                'account_id.require'      => '账号ID不可为空！',
+                'exclude_pinned.default'  => true,
+                'folder_id.default'       => 0,
+                'offset_date.default'     => 0,
+                'offset_id.default'       => 0,
+                'offset_peer.default'     => null,
+                'limit.default'           => 20,
             ]);
             $response = MadelineProtoApi::getDialogs($map['account_id']);
             $this->success('获取成功',$response);

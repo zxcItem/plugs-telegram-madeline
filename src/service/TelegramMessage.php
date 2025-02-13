@@ -27,7 +27,7 @@ class TelegramMessage extends Service
             usort($response['messages'], function($a, $b) {return $a['id'] - $b['id'];});
             $contentMessage = [];
             foreach ($response['messages'] as $message) {
-                if (isset($message['_']) && ($message['_'] === 'messageService' || isset($message['fwd_from']))) {
+                if (isset($message['_']) && ($message['_'] === 'messageService')) {
                     continue;  // 跳过符合条件的消息
                 }
                 $message['grouped_id'] = isset($message['grouped_id']) ? $message['grouped_id'] : CodeExtend::uniqidNumber(17);
