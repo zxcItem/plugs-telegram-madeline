@@ -58,9 +58,6 @@
     <!-- {if auth("edit")} -->
     <a class="layui-btn layui-btn-sm" data-modal='{:url("edit")}?id={{d.id}}'>编 辑</a>
     <!--{/if}-->
-    <!--{if auth("announce")}-->
-    <a class="layui-btn layui-btn-sm layui-btn-primary" data-open="{:url('announce')}?id={{d.id}}">详 情</a>
-    <!--{/if}-->
     <!--{if auth("remove")}-->
     <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要永久删除吗？" data-action="{:url('remove')}" data-value="id#{{d.id}}">删 除</a>
     <!--{/if}-->
