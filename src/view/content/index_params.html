@@ -1,13 +1,7 @@
 <form action="{:sysuri()}" class="layui-form-pane layui-form layui-card" data-auto="true" method="post">
     <div class="layui-card-body padding-left-40">
         <div class="layui-form-item">
-            <label class="layui-form-label color-green">Bot Token</label>
-            <div class="layui-input-block">
-                <input class="layui-input" name="bot_token" value='{$vo.bot_token|default=""}'>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label color-green">素材转发频道</label>
+            <label class="layui-form-label color-green">素材推送频道</label>
             <div class="layui-input-block">
                 <input class="layui-input" type="number" name="channel_forward" value='{$vo.channel_forward|default=""}'>
             </div>

@@ -27,14 +27,14 @@ class TelegramMessage extends Service
             usort($response['messages'], function($a, $b) {return $a['id'] - $b['id'];});
             $contentMessage = [];
             foreach ($response['messages'] as $message) {
-                if (isset($message['_']) && ($message['_'] === 'messageService')) {
+                if (isset($message['_']) && isset($message['entities']) && ($message['_'] === 'messageService')) {
                     continue;  // 跳过符合条件的消息
                 }
                 $message['grouped_id'] = isset($message['grouped_id']) ? $message['grouped_id'] : CodeExtend::uniqidNumber(17);
                 if (self::redisCache($message['grouped_id'],$message['id'])) continue;
                 if (self::instance()->checkKeyword($message['message'])) continue;
                 $mediaMessage = [];
-                if ($message['media']) {
+                if (isset($message['media'])) {
                     if (!in_array($message['media']['_'], ['messageMediaPhoto', 'messageMediaDocument'])) continue;
                     $mediaMessage = self::messageMediaDocument($message,$channel);
                 }
